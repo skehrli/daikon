@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.checkerframework.checker.collectionownership.qual.PolyOwningCollection;
 import org.checkerframework.checker.lock.qual.GuardSatisfied;
 import org.checkerframework.dataflow.qual.Pure;
 import org.checkerframework.dataflow.qual.SideEffectFree;
@@ -40,7 +41,7 @@ public class NISuppressionSet implements Iterable<NISuppression> {
   }
 
   @Override
-  public Iterator<NISuppression> iterator() {
+  public Iterator<NISuppression> iterator(@PolyOwningCollection NISuppressionSet this) {
     List<NISuppression> asList = Arrays.<NISuppression>asList(suppression_set);
     return asList.iterator();
   }

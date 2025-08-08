@@ -13,8 +13,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.StringTokenizer;
 import org.checkerframework.checker.calledmethods.qual.EnsuresCalledMethods;
+import org.checkerframework.checker.collectionownership.qual.NotOwningCollection;
 import org.checkerframework.checker.lock.qual.GuardSatisfied;
 import org.checkerframework.checker.mustcall.qual.CreatesMustCallFor;
+import org.checkerframework.checker.mustcall.qual.NotOwning;
 import org.checkerframework.checker.mustcall.qual.Owning;
 import org.plumelib.util.FilesPlume;
 import org.plumelib.util.Partitioner;
@@ -73,7 +75,7 @@ public class DtracePartitioner implements Closeable, Partitioner<String, String>
   }
 
   @Override
-  public String next(@GuardSatisfied DtracePartitioner this) {
+  public @NotOwning String next(@GuardSatisfied DtracePartitioner this) {
     try {
       String ret = grabNextInvocation();
       if (ret.indexOf("EXIT") != -1) {
@@ -94,7 +96,7 @@ public class DtracePartitioner implements Closeable, Partitioner<String, String>
    * invocation delimter. Note that multiple blank lines between invocations might occur, so the
    * callee is responsible for checking if the returned String is a blank line.
    */
-  private String grabNextInvocation(@GuardSatisfied DtracePartitioner this) throws IOException {
+  private String grabNextInvocation(@NotOwningCollection @GuardSatisfied DtracePartitioner this) throws IOException {
     StringBuilder sb = new StringBuilder();
     while (br.ready()) {
       String line = br.readLine();

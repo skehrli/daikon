@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 import org.checkerframework.checker.lock.qual.GuardSatisfied;
+import org.checkerframework.checker.mustcall.qual.NotOwning;
 import org.checkerframework.checker.nullness.qual.EnsuresNonNullIf;
 import org.checkerframework.checker.nullness.qual.KeyFor;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -125,7 +126,7 @@ public class PptMap implements Serializable {
       }
 
       @Override
-      public PptTopLevel next(/*! >>>@GuardSatisfied Iterator<PptTopLevel> this*/ ) {
+      public @NotOwning PptTopLevel next(/*! >>>@GuardSatisfied Iterator<PptTopLevel> this*/ ) {
         iter_view.next(); // to check for concurrent modifications
         return iter_sort.next();
       }
@@ -184,7 +185,7 @@ public class PptMap implements Serializable {
       }
 
       @Override
-      public PptTopLevel next(/*! >>>@GuardSatisfied Iterator<PptTopLevel> this*/ ) {
+      public @NotOwning PptTopLevel next(/*! >>>@GuardSatisfied Iterator<PptTopLevel> this*/ ) {
         if ((cond_iterator != null) && cond_iterator.hasNext()) {
           return cond_iterator.next();
         }

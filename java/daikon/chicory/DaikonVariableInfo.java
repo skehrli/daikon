@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.StringJoiner;
 import java.util.regex.Matcher;
+import org.checkerframework.checker.collectionownership.qual.PolyOwningCollection;
 import org.checkerframework.checker.interning.qual.Interned;
 import org.checkerframework.checker.lock.qual.GuardSatisfied;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -240,7 +241,7 @@ public abstract class DaikonVariableInfo
    * @return an iterator over all the node's children
    */
   @Override
-  public Iterator<DaikonVariableInfo> iterator() {
+  public Iterator<DaikonVariableInfo> iterator(@PolyOwningCollection DaikonVariableInfo this) {
     return Collections.unmodifiableList(children).iterator();
   }
 

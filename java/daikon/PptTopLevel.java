@@ -102,6 +102,7 @@ import org.checkerframework.checker.initialization.qual.UnderInitialization;
 import org.checkerframework.checker.initialization.qual.UnknownInitialization;
 import org.checkerframework.checker.interning.qual.Interned;
 import org.checkerframework.checker.lock.qual.GuardSatisfied;
+import org.checkerframework.checker.mustcall.qual.NotOwning;
 import org.checkerframework.checker.mustcall.qual.Owning;
 import org.checkerframework.checker.nullness.qual.EnsuresNonNull;
 import org.checkerframework.checker.nullness.qual.EnsuresNonNullIf;
@@ -300,7 +301,7 @@ public class PptTopLevel extends Ppt {
     }
 
     @Override
-    public PptConditional next(@GuardSatisfied CondIterator this) {
+    public @NotOwning PptConditional next(@GuardSatisfied CondIterator this) {
 
       if (!hasNext()) {
         throw new NoSuchElementException();
@@ -3349,7 +3350,7 @@ public class PptTopLevel extends Ppt {
     }
 
     @Override
-    public Iterator<Invariant> next(@GuardSatisfied ViewsIteratorIterator this) {
+    public @NotOwning Iterator<Invariant> next(@GuardSatisfied ViewsIteratorIterator this) {
       if (vitor.hasNext()) {
         return vitor.next().invs.iterator();
       } else {
