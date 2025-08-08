@@ -213,7 +213,7 @@ public abstract class DaikonVariableInfo
   }
 
   /**
-   * Return a StringBuilder that contains the name of this node and all ancestors of this node.
+   * Returns a StringBuilder that contains the name of this node and all ancestors of this node.
    * Longer indentations correspond to deeper levels in the tree.
    *
    * @param offset the offset to begin each line with
@@ -875,7 +875,7 @@ public abstract class DaikonVariableInfo
    * representation type of a class object is "hashcode."
    *
    * @param type the type of the variable
-   * @param asArray whether the variable is being output as an array (true) or as a pointer (false)
+   * @param asArray true if the variable is being output as an array (true) or as a pointer (false)
    * @return the representation type as a string
    */
   public static String getRepName(Class<?> type, boolean asArray) {
@@ -947,7 +947,7 @@ public abstract class DaikonVariableInfo
   }
 
   /**
-   * Returns whether or not the specified field is visible from the Class current. All fields within
+   * Returns true if the specified field is visible from the Class current. All fields within
    * instrumented classes are considered visible from everywhere (to match dfej behavior).
    */
   public static boolean isFieldVisible(Class<?> current, Field field) {
@@ -1231,9 +1231,9 @@ public abstract class DaikonVariableInfo
   }
 
   /**
-   * Returns whether or not the fields of the specified class should be included, based on whether
-   * the Class type is a system class or not. Right now, any system classes are excluded, but a
-   * better way of determining this is probably necessary.
+   * Returns true if the fields of the specified class should be included, based on whether the
+   * Class type is a system class or not. Right now, any system classes are excluded, but a better
+   * way of determining this is probably necessary.
    */
   public static boolean systemClass(Class<?> type) {
     String class_name = type.getName();
@@ -1254,7 +1254,7 @@ public abstract class DaikonVariableInfo
   }
 
   /**
-   * Return the type name without aux information.
+   * Returns the type name without aux information.
    *
    * @see #getTypeName()
    */
@@ -1319,7 +1319,7 @@ public abstract class DaikonVariableInfo
     return name.compareTo(dv.name);
   }
 
-  /** Returns whether or not this variable is an array. */
+  /** Returns true if this variable is an array. */
   public boolean isArray() {
     return isArray;
   }
@@ -1334,7 +1334,7 @@ public abstract class DaikonVariableInfo
     return null;
   }
 
-  /** Returns whether or not this variable has a rep type of hashcode. */
+  /** Returns true if this variable has a rep type of hashcode. */
   public boolean isHashcode() {
     return getRepTypeName().equals("hashcode");
   }
@@ -1343,7 +1343,7 @@ public abstract class DaikonVariableInfo
     return getRepTypeName().equals("hashcode[]");
   }
 
-  /** Returns whether or not the declared type of this variable is int. */
+  /** Returns true if the declared type of this variable is int. */
   public boolean isInt() {
     String[] sarr = getTypeName().split("  *");
     return sarr[0].equals("int");
